@@ -34,6 +34,7 @@ function songList(show){
             <div class="col-md-9">
                 <h3 class="lyrics-name"><span id="title">${title}</span></h3>
                 <p class="author lead">Album by <span id="album">${album}</span></p>
+                <p class="author lead">Artist by <span id="album">${artist}</span></p>
             </div>
             <div class="col-md-3 text-md-right text-center">
             <button onclick="lyrics('${artist}','${title}')" class="btn btn-success">Get Lyrics</button>
@@ -45,32 +46,20 @@ function songList(show){
 }
 
 function lyrics(artist,title) {
-    console.log(artist,title)
-    fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`)
+    // console.log(artist,title)
+    fetch(`https://api.lyrics.ovh/v1/'${artist}'/'${title}'`)
     .then(response => response.json())
-    .then(data =>displaySpecific(data))
+    .then(data =>displayShow(data))
 }
 
-function displaySpecific(part) {
-    console.log(part);
+
+function displayShow(part) {
+     console.log(part,'hello');
     let displayInfo =document.getElementById('info');
-    displayInfo.innerText += `${artist},${title}`
+    displayInfo.innerHTML += `
+    <pre id="info"class="lyric text-white">'${part.lyrics}</pre>
+`
 }
-
-
-
-
-// function displaySpecific(part){
-//     console.log(part)
-//     // let displayInfo = document.getElementById('info')
-    
-//     // displayInfo.innerText +=`
-//     // <pre id="info"class="lyric text-white">${artist},${title} </pre>        
-//     // `
-// }
-
-
-
 
 
 
